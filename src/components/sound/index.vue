@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import Sound from './index';
-import { ref, getCurrentInstance} from 'vue'
+import { ref, getCurrentInstance, reactive } from 'vue'
+import { storeToRefs } from 'pinia';
+import { useSoundStore } from "@/store/sound";
+import type { UseSoundStore } from "@/store/store"
+
+const soundStore: UseSoundStore = useSoundStore()
+
+const { word, inputWord, wordVoice } = storeToRefs(soundStore);
+
 defineProps<{
     data: Array<Array<Sound>>,
     title: string
@@ -14,7 +22,7 @@ interface Lock {
 }
 
 const audio = new Audio();
-const lock = ref<Lock>({
+const lock = reactive<Lock>({
     locked: false
 })
 const isPlay = ref<Boolean>(false)
@@ -30,9 +38,8 @@ audio.addEventListener('ended', () => {
 
 function startVoiced(src: string) {
     isPlay.value = true
-
     return new Promise<Boolean>((resolve, reject) => {
-        audio.src = src
+        audio.src = src // 设置音频文件的 URL
         let startTime: Date = new Date()
         let timer = setInterval(() => {
             if (!isPlay.value) {
@@ -57,71 +64,75 @@ function startVoiced(src: string) {
     })
 }
 
-async function soundClick(romaji: string | Array<Sound>) {
-    // 设置音频文件的 URL
-    if (lock.value.locked) {
+async function soundClick(romaji: string | Array<Sound>,kanji?:string) {
+    if (lock.locked) {
         return
     }
-
-    lock.value.locked = true
+    lock.locked = true
     try {
-        if (typeof romaji === 'string') {
-            await startVoiced('/sound/' + romaji + '.m4a')
-        } else if (Array.isArray(romaji)) {
-            for (let index = 0; index < romaji.length; index++) {
-                try {
-                    Romaji.value = romaji[index]
-                    await startVoiced('/sound/' + romaji[index].Romaji + '.m4a')
-                }catch(error){
-                    console.log(error)
-                    continue
+        if (kanji && inputWord.value ) {
+            word.value += kanji
+        }
+        if (wordVoice.value) {
+            if (typeof romaji === 'string') {
+                await startVoiced('./sound/' + romaji + '.m4a')
+            } else if (Array.isArray(romaji)) {
+                for (let index = 0; index < romaji.length; index++) {
+                    try {
+                        Romaji.value = romaji[index]
+                        await startVoiced('./sound/' + romaji[index].Romaji + '.m4a')
+                    } catch (error) {
+                        console.log(error)
+                        continue
+                    }
                 }
             }
         }
     } catch (error) {
         console.error(error)
     } finally {
-        lock.value.locked = false
+        lock.locked = false
     }
 }
-
-
-
 </script>
 
 <template>
-    <table class="table">
-        <!-- head -->
-        <thead>
-            <tr>
-                <th :colspan="data[0].length * 3 + 1">{{ title }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>\</td>
-                <td @click="soundClick(data.filter(row => row[i]?.Romaji).map(row => row[i]))"
-                    v-for="v, i in data[0]" :colspan="v.Colspan * 3">
-                    {{ v.Hiragana }} / {{ v.Katakana }} 段
-                </td>
-            </tr>
-            <tr v-for="line in data">
-                <td @click="soundClick(line.filter(row => row?.Romaji).map(row => row))"> {{ line[0].Hiragana }} / {{
-                    line[0].Katakana }} 行 </td>
-                <template v-for="sound in line">
-                    <td v-if="!sound.Hiragana" :colspan="sound.Colspan * 3">\</td>
-                    <td @click="soundClick(sound?.Romaji)" v-if="sound?.Hiragana" :colspan="sound.Colspan">{{
-                        sound?.Hiragana
-                    }}</td>
-                    <td @click="soundClick(sound?.Romaji)" v-if="sound?.Katakana" :colspan="sound.Colspan">{{
-                        sound?.Katakana
-                    }}</td>
-                    <td @click="soundClick(sound?.Romaji)" :class="{'hover':JSON.stringify(Romaji)==JSON.stringify(sound)}" v-if="sound?.Romaji" :colspan="sound.Colspan">{{ sound?.Romaji }}
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th :colspan="data[0].length * 3 + 1">{{ title }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\</td>
+                    <td @click="soundClick(data.filter(row => row[i]?.Romaji).map(row => row[i]))" v-for="v, i in data[0]"
+                        :colspan="v.Colspan * 3">
+                        {{ v.Hiragana }} / {{ v.Katakana }} 段
                     </td>
-                </template>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+                <tr v-for="line in data">
+                    <td @click="soundClick(line.filter(row => row?.Romaji).map(row => row))"> {{ line[0].Hiragana }} / {{
+                        line[0].Katakana }} 行 </td>
+                    <template v-for="sound in line">
+                        <td v-if="!sound.Hiragana" :colspan="sound.Colspan * 3">\</td>
+                        <td @click="soundClick(sound?.Romaji,sound?.Hiragana)" v-if="sound?.Hiragana" :colspan="sound.Colspan">{{
+                            sound?.Hiragana
+                        }}</td>
+                        <td @click="soundClick(sound?.Romaji,sound?.Katakana)" v-if="sound?.Katakana" :colspan="sound.Colspan">{{
+                            sound?.Katakana
+                        }}</td>
+                        <td @click="soundClick(sound?.Romaji)"
+                            :class="{ 'hover': JSON.stringify(Romaji) == JSON.stringify(sound) }" v-if="sound?.Romaji"
+                            :colspan="sound.Colspan">{{ sound?.Romaji }}
+                        </td>
+                    </template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <style lang="sass" scoped>

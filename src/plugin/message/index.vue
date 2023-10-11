@@ -12,7 +12,7 @@
 
 <script setup lang='ts'>
 import {  computed, ref, onMounted} from 'vue'
-import  {IMessageProps} from './type'
+import type { IMessageProps } from './type'
 import { useResizeObserver } from '@vueuse/core'
 import {getLastOffset} from './instance'
 
@@ -40,7 +40,18 @@ const Style = computed(() => ({
 
 
 
-const alertType = computed(() => `alert-${props.type}`)
+const alertType = computed(() => { //tailwindcss要预编译类名,一定要这么写
+    let tp = props.type
+    if(tp == "error"){
+        return "alert-error"
+    }else if(tp == "warning"){
+        return "alert-warning"
+    }else if(tp == "success"){
+        return "alert-success"
+    }else {
+        return "alert-info"
+    }
+})
 
 const icon:any = {
     "info":"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",

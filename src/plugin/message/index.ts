@@ -1,12 +1,10 @@
-
+import type { IMessageProps, MessageType, Message, Instance, MessageOptions } from './type'
 import { createVNode, isVNode, render, App } from 'vue'
 import MessageConstructor from './index.vue'
-import type { IMessageProps, MessageType, Message, Instance, MessageOptions } from './type'
-import { messageDefaults, messageTypes } from './type'
+import { messageDefaults, messageTypes } from './default'
 import { instances } from './instance'
-
 let seed = 0
-let zIndex = 1
+let zIndex = 30
 
 const normalizeOptions = (params: MessageOptions) => {
     const options = params;
@@ -14,6 +12,7 @@ const normalizeOptions = (params: MessageOptions) => {
         ...messageDefaults,
         ...options
     };
+    
     if (messageTypes.indexOf(normalized.type) < 0){
         normalized.type="success"
     }
@@ -76,10 +75,9 @@ const createMessage = ({ appendTo, ...options }: MessageOptions) => {
         props: vnode!.component!.props
     };
     return instance;
-
+    
 }
-
-const message: Message = (options: MessageOptions | string) => {
+export const message: Message = (options: MessageOptions | string) => {
     if (typeof options === 'string') {
         options = { message: options }
     }

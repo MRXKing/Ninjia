@@ -1,5 +1,5 @@
 import { shallowReactive } from 'vue';
-import { Instance } from './type';
+import type {Instance} from './type'
 const instances = shallowReactive<Instance[] >([]);
 const getInstance = (id:string) => {
   const idx = instances.findIndex((instance) => instance.id === id);
