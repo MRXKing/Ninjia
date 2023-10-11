@@ -33,7 +33,9 @@ Ninjia Project is website for Japanese Fifty Tone, Hiragana, Roman Pronunciation
 
 ## Preview
 
-demo [here](https://mrxking.github.io/Ninjia/).
+demo website [here](https://mrxking.github.io/Ninjia/).
+
+You can see  the configuration bar in the upper right corner
 
 ## Usage
 
