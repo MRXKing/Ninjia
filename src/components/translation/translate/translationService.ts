@@ -15,22 +15,8 @@ function generateRandomSalt(length:number) {
     return salt;
 }
 
-function hexArrayToString(hexArray:any) {
-    let str = '';
-  
-    for (let i = 0; i < hexArray.length; i++) {
-      const hexString = hexArray[i];
-      const charCode = parseInt(hexString.toString(16), 16);
-      str += String.fromCharCode(charCode);
-    }
-  
-    return str;
-}
-
-
-
-const BaiduSecertKey = [0x70, 0x56, 0x66, 0x64, 0x55, 0x37, 0x76, 0x39, 0x42, 0x74,0x5a,0x6a, 0x37, 0x68, 0x67, 0x55, 0x72, 0x4c, 0x67, 0x46]
-const BaiduAppID = "20230807001772104"
+const BaiduSecertKey:string = ""
+const BaiduAppID:string = ""
 
 const BaiduApiUrl:string = "https://fanyi-api.baidu.com/api/trans/vip/translate"
 
@@ -71,12 +57,12 @@ const BaiduTranslate = async (params:BaiduParms):Promise<BaiduResult> => {
         if(!params.salt){
             params.salt = generateRandomSalt(8)
         }
-        let secertkey = hexArrayToString(BaiduSecertKey)
+
         if(!params.appid){
             params.appid = BaiduAppID
         }
         if(!params.sign){
-            params.sign = md5(params.appid+params.q+params.salt+secertkey)
+            params.sign = md5(params.appid+params.q+params.salt+BaiduSecertKey)
         }
         const callbackName:string = `jsonpCallback_${Date.now()}`
         const url:URL = new URL(BaiduApiUrl)
