@@ -28,5 +28,3 @@ span
     rt
         margin-right: 5px
 </style>
-
-./analyzer/kuroshiro

@@ -1,18 +1,75 @@
-# Vue 3 + TypeScript + Vite
+# Ninjia
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<a href="https://github.com/vuejs/core" target="_blank">
+    <img src="https://img.shields.io/badge/vue-3.3.4-brightgreen.svg" alt="vue3">
+ </a>
+<a href="https://github.com/saadeghi/daisyui" target="_blank">
+    <img src="https://img.shields.io/badge/daisyui-3.9.2-black.svg" alt="daisyui">
+</a>
+ <a href="https://github.com/tailwindlabs/tailwindcss" target="_blank">
+    <img src="https://img.shields.io/badge/tailwindcss-3.3.3-blue.svg" alt="tailwindcss">
+ </a>
+ <a href="https://github.com/vuejs/pinia" target="_blank">
+    <img src="https://img.shields.io/badge/pinia-2.1.6-yellow.svg" alt="pinia">
+ </a>
 
-## Recommended IDE Setup
+Ninjia Project is website for Japanese Fifty Tone, Hiragana, Roman Pronunciation, Word Meaning Conversion
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+*Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md)
 
-## Type Support For `.vue` Imports in TS
+## Support
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Chinese translation
+  
+  - [x] Baidu
+  
+  - [ ] Google
+  
+  - [ ] Youdao
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- Romanic sound & convert
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Kanji tokenize
+
+## Preview
+
+demo [here](https://mrxking.github.io/Ninjia/).
+
+## Usage
+
+### Baidu Translation plugin
+
+[translationService.ts](https://github.com/MRXKing/Ninjia/blob/main/src/components/translation/translate/translationService.ts)
+
+```ts
+const BaiduSecertKey:string = ""  //Create your app  from Baidu Open Platform  to get key
+const BaiduAppID:string = ""
+```
+
+## Steps
+
+### Install
+
+Install dependent  with npm  or other package
+
+```sh
+npm install 
+```
+
+### Run Web Server
+
+```sh
+vite
+```
+
+### Build
+
+```sh
+npm run build
+```
+
+## Dependencies Project
+
+[kuroshiro](https://github.com/hexenq/kuroshiro)
+
+[kuromoji.js](https://github.com/takuyaa/kuromoji.js)

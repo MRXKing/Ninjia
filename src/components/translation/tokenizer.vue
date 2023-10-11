@@ -59,4 +59,4 @@ const tkColums:string[] = [
 th,td 
     border: 1px solid hsl(var(--bc)/0.03) !important
     text-align: center
-</style>./analyzer/kuroshiro
+</style>
