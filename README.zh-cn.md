@@ -13,64 +13,64 @@
     <img src="https://img.shields.io/badge/pinia-2.1.6-yellow.svg" alt="pinia">
  </a>
 
-Ninjia Project is website for Japanese Fifty Tone, Hiragana, Roman Pronunciation, Word Meaning Conversion
+忍者 日语五十音,平片假名、罗马音、词义转换web网站
 
-*Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md)
+*其他说明语言: [English](README.md), [简体中文](README.zh-cn.md)
 
-## Support
+## 支持
 
-- Translation
+- 翻译
   
-  - [x] Baidu
+  - [x] 百度
   
-  - [ ] Google
+  - [ ] 谷歌
   
-  - [ ] Youdao
+  - [ ] 有道
 
-- Romanic sound & convert
+- 罗马音 以及 转罗马音功能
 
-- Kanji tokenize
+- 汉字标记
 
-## Preview
+## 预览
 
 demo website [here](https://mrxking.github.io/Ninjia/).
 
-You can see  the configuration bar in the upper right corner
+请查看右上角的配置栏
 
-## Usage
+## 使用
 
-### Baidu Translation plugin
+### 百度翻译插件
 
 [translationService.ts](https://github.com/MRXKing/Ninjia/blob/main/src/components/translation/translate/translationService.ts)
 
 ```ts
-const BaiduSecertKey:string = ""  //Create your app  from Baidu Open Platform  to get key
+const BaiduSecertKey:string = ""  //百度开放平台创建免费应用获取key
 const BaiduAppID:string = ""
 ```
 
-## Steps
+## 步骤
 
-### Install
+### 安装
 
-Install dependent  with npm  or other package
+使用Npm或其他包管理器安装依赖
 
 ```sh
 npm install 
 ```
 
-### Run Web Server
+### 启动web服务器
 
 ```sh
 vite
 ```
 
-### Build
+### 构建项目
 
 ```sh
 npm run build
 ```
 
-## Dependencies Project
+## 参考项目
 
 [kuroshiro](https://github.com/hexenq/kuroshiro)
 
