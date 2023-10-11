@@ -49,7 +49,7 @@ function startVoiced(src: string) {
             let currentTime: Date = new Date()
             const timeDiff: number = currentTime.getTime() - startTime.getTime();
             const seconds: number = Math.floor(timeDiff / 1000);
-            if (seconds > 2) {
+            if (seconds > 8) {
                 let errMsg: string = `load ${src} timeout`;
                 instance.proxy.$message({
                     duration: 2000,
