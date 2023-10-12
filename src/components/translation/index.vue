@@ -2,7 +2,7 @@
     <div class="w-full ">
         <div class="form-control">
             <label class="label">
-                <span class="label-text">词义转换器</span>
+                <span class="label-text">{{$t("WordMeaningConverter")}}</span>
             </label>
             <input type="text" v-model="word" placeholder="Type here" class="input input-bordered w-full" />
         </div>
@@ -18,7 +18,7 @@ import tokenizer from './tokenizer.vue'
 import romaji from './romaji.vue'
 import translate from './translate.vue'
 import { storeToRefs } from 'pinia';
-import { useSoundStore } from "@/store/sound";
+import { useSoundStore } from "@/store/index";
 import type {UseSoundStore} from "@/store/store"
 
 

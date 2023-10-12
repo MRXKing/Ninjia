@@ -17,3 +17,14 @@ export interface SoundActions{ //暂时用继承定义store的actions类型，�
 }
 
 export type UseSoundStore = StoreWithActions<SoundState, SoundActions>;
+
+
+export interface I18nState {
+    locale:string
+}
+
+export interface I18nActions {
+    switchLocale(lang:string):void
+}
+
+export type UseI18nStore = StoreWithActions<I18nState, I18nActions>;

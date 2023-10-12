@@ -1,0 +1,17 @@
+{
+    "theme":"主题",
+    "WordMeaningConverter":"词义转换器",
+    "translate":"翻译",
+    "tokenize":"词性",
+    "romaji":"罗马音",
+    "romajiSwitch":"罗马音",
+    "tokenizeSwitch":"词性",
+    "wordVoice":"文字语言",
+    "wordInput":"文字输入",
+    "translateSwitch":"翻译",
+    "baiduTranslate":"百度翻译",
+    "hiragana":"清音",
+    "voicedConsonant":"浊音",
+    "voicedFricative":"半浊音",
+    "glottalStop":"拗音"
+}

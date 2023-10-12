@@ -10,7 +10,7 @@
                             d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
                         </path>
                     </svg>
-                    <span class="hidden font-normal md:inline">主题</span>
+                    <span class="hidden font-normal md:inline">{{ $t("theme") }}</span>
                     <svg width="12px" height="12px" class="hidden h-2 w-2 fill-current opacity-60 sm:inline-block"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
                         <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
@@ -642,6 +642,32 @@
                     </div>
                 </div>
             </div>
+            <div title="Change Language" class="dropdown">
+                <div tabindex="0" class="btn btn-ghost normal-case" data-svelte-h="svelte-16sc62l"><svg
+                        class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 512 512">
+                        <path d="M363,176,246,464h47.24l24.49-58h90.54l24.49,58H480ZM336.31,362,363,279.85,389.69,362Z">
+                        </path>
+                        <path
+                            d="M272,320c-.25-.19-20.59-15.77-45.42-42.67,39.58-53.64,62-114.61,71.15-143.33H352V90H214V48H170V90H32v44H251.25c-9.52,26.95-27.05,69.5-53.79,108.36-32.68-43.44-47.14-75.88-47.33-76.22L143,152l-38,22,6.87,13.86c.89,1.56,17.19,37.9,54.71,86.57.92,1.21,1.85,2.39,2.78,3.57-49.72,56.86-89.15,79.09-89.66,79.47L64,368l23,36,19.3-11.47c2.2-1.67,41.33-24,92-80.78,24.52,26.28,43.22,40.83,44.3,41.67L255,362Z">
+                        </path>
+                    </svg> <svg width="12px" height="12px" class="hidden h-2 w-2 fill-current opacity-60 sm:inline-block"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+                        <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                    </svg></div>
+                <div
+                    class="dropdown-content bg-base-200 text-base-content rounded-box top-px mt-16 w-56 overflow-y-auto shadow">
+                    <ul class="menu menu-sm gap-1" tabindex="0">
+                        <li><button @click="i18nStore.switchLocale('en')" :class="[locale == 'en'?'active':'']"><span
+                                    class="badge badge-sm badge-outline !pl-1.5 !pr-1 pt-px font-mono !text-[.6rem] font-bold tracking-widest opacity-50">EN</span>
+                                English </button> </li>
+                    
+                        <li><button @click="i18nStore.switchLocale('zh')" :class="[locale == 'cn'?'active':'']"><span
+                                    class="badge badge-sm badge-outline !pl-1.5 !pr-1 pt-px font-mono !text-[.6rem] font-bold tracking-widest opacity-50">ZH</span>
+                                中文 </button> </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="navbar-center">
             <a class="btn btn-ghost normal-case text-xl">Ninjia</a>
@@ -662,7 +688,7 @@
                             <input type="checkbox" class="toggle" v-model="i.checked" />
 
                         </label>
-                        
+
                         <details class="collapse rounded-none" v-else-if="'subMenu' in i">
                             <summary class="after:content-none"><span>{{ i.desc }}</span></summary>
                             <div class="collapse-content">
@@ -676,27 +702,30 @@
 
                                     </li>
                                 </ul>
-                            </div>
-                        </details>
-                    </li>
-                </ul>
-            </details>
-        </div>
+                        </div>
+                    </details>
+                </li>
+            </ul>
+        </details>
     </div>
-</template>
+</div></template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
 // import type { Ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useSoundStore } from "@/store/sound";
-import type {UseSoundStore} from "@/store/store"
+import { useSoundStore,userI18nStore } from "@/store/index";
+import type { UseSoundStore,UseI18nStore } from "@/store/store"
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
-
-const soundStore:UseSoundStore = useSoundStore()
+const soundStore: UseSoundStore = useSoundStore()
 
 const { inputWord, wordVoice, convRomaji, convTokenize, BaiduTranslate } = storeToRefs(soundStore)
 
+const i18nStore: UseI18nStore = userI18nStore()
+
+const { locale } = storeToRefs(i18nStore)
 // interface Menu {
 //     desc: string
 //     checked?: Ref<boolean>
@@ -704,21 +733,21 @@ const { inputWord, wordVoice, convRomaji, convTokenize, BaiduTranslate } = store
 // }
 
 const cfgMenu = reactive([{
-    desc: "文字输入",
+    desc: t("wordInput"),
     checked: inputWord,
 }, {
-    desc: "文字语音",
+    desc: t("wordVoice"),
     checked: wordVoice,
 }, {
-    desc: "罗马音",
+    desc: t("romajiSwitch"),
     checked: convRomaji,
 }, {
-    desc: "词性",
+    desc: t("tokenizeSwitch"),
     checked: convTokenize,
 }, {
-    desc: "翻译",
+    desc: t("translateSwitch"),
     subMenu: {
-        "百度翻译": BaiduTranslate
+        [t("baiduTranslate")]: BaiduTranslate
     },
 }])
 

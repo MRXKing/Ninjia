@@ -1,0 +1,17 @@
+{
+    "theme":"theme",
+    "WordMeaningConverter":"WordMeaningConverter",
+    "translate":"translate",
+    "tokenize":"tokenize",
+    "romaji":"romaji",
+    "romajiSwitch":"romaji",
+    "tokenizeSwitch":"tokenize",
+    "wordVoice":"wordVoice",
+    "wordInput":"wordInput",
+    "translateSwitch":"translate",
+    "baiduTranslate":"baidu",
+    "hiragana":"hiragana",
+    "voicedConsonant":"voiced consonant",
+    "voicedFricative":"voiced fricative",
+    "glottalStop":"glottal stop"
+}

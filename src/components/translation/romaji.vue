@@ -1,7 +1,7 @@
 <template>
     <div class="overflow-x-auto mt-2">
         <label class="label">
-            <span class="label-text">罗马音</span>
+            <span class="label-text">{{$t("romaji")}}</span>
         </label>
         <span class="pl-1 whitespace-nowrap" v-html="romaji"></span>
     </div>

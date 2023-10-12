@@ -2,7 +2,7 @@
 import Sound from './index';
 import { ref, getCurrentInstance, reactive } from 'vue'
 import { storeToRefs } from 'pinia';
-import { useSoundStore } from "@/store/sound";
+import { useSoundStore } from "@/store/index";
 import type { UseSoundStore } from "@/store/store"
 
 const soundStore: UseSoundStore = useSoundStore()

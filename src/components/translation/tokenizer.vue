@@ -1,7 +1,7 @@
 <template>
     <div class="overflow-x-auto mt-2 ">
         <label class="label">
-            <span class="label-text">词性</span>
+            <span class="label-text">{{$t("tokenize")}}</span>
         </label>
         <table class="table">
             <thead>

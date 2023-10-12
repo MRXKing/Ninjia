@@ -21,10 +21,10 @@ onMounted(() => {
                 </div>
             </div>
             <div class="py-[5px] lg:px-[15px] p-0">
-                <sound :data="gojyuon" title="清音"></sound>
-                <sound :data="voicedSound" title="浊音"></sound>
-                <sound :data="semivoicedSound" title="半浊音"></sound>
-                <sound :data="contractedSound" title="拗音"></sound>
+                <sound :data="gojyuon" :title="$t('hiragana')"></sound>
+                <sound :data="voicedSound" :title="$t('voicedConsonant')"></sound>
+                <sound :data="semivoicedSound" :title="$t('voicedFricative')"></sound>
+                <sound :data="contractedSound" :title="$t('glottalStop')"></sound>
             </div>
             
         </div>
