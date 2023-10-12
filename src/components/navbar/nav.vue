@@ -711,7 +711,7 @@
 </div></template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive,computed } from 'vue'
 // import type { Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSoundStore,userI18nStore } from "@/store/index";
@@ -732,7 +732,7 @@ const { locale } = storeToRefs(i18nStore)
 //     subMenu: Record<string, Ref<boolean>> | ""
 // }
 
-const cfgMenu = reactive([{
+const cfgMenu = computed(()=>reactive([{
     desc: t("wordInput"),
     checked: inputWord,
 }, {
@@ -749,8 +749,7 @@ const cfgMenu = reactive([{
     subMenu: {
         [t("baiduTranslate")]: BaiduTranslate
     },
-}])
-
+}]))
 </script>
 
 <style lang="sass" scoped></style>
